@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'TMDB_LIST' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'Kingfisher'
+  pod 'SnapKit'
+
+  # Pods for TMDB_LIST
+
+  target 'TMDB_LISTTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'TMDB_LISTUITests' do
+    # Pods for testing
+  end
+
+end
