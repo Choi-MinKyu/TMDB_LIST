@@ -25,6 +25,7 @@
 		87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC628A65D5E00551B91 /* DownloadViewController.swift */; };
 		87697ECA28A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC928A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift */; };
 		87697ECC28A663D500551B91 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ECB28A663D500551B91 /* TitleCollectionViewCell.swift */; };
+		87697ECE28A6E07D00551B91 /* VideoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ECD28A6E07D00551B91 /* VideoHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		87697EC628A65D5E00551B91 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		87697EC928A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		87697ECB28A663D500551B91 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		87697ECD28A6E07D00551B91 /* VideoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHeaderView.swift; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,7 @@
 			children = (
 				87697EC928A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift */,
 				87697ECB28A663D500551B91 /* TitleCollectionViewCell.swift */,
+				87697ECD28A6E07D00551B91 /* VideoHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87697EC528A65CE200551B91 /* CommingSonnViewController copy.swift in Sources */,
+				87697ECE28A6E07D00551B91 /* VideoHeaderView.swift in Sources */,
 				87697EC328A65CB500551B91 /* SearchViewController.swift in Sources */,
 				87697E9128A655CA00551B91 /* ViewController.swift in Sources */,
 				87697E8D28A655CA00551B91 /* AppDelegate.swift in Sources */,

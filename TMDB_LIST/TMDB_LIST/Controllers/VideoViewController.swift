@@ -28,6 +28,8 @@ final class VideoViewController: UIViewController {
         
         self.setupLayout()
         self.configureNavigationBar()
+        
+        self.tableView.tableHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
     }
     
     override func viewDidLayoutSubviews() {
