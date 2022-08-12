@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,12 +13,16 @@
 		87697E8D28A655CA00551B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697E8C28A655CA00551B91 /* AppDelegate.swift */; };
 		87697E8F28A655CA00551B91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697E8E28A655CA00551B91 /* SceneDelegate.swift */; };
 		87697E9128A655CA00551B91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697E9028A655CA00551B91 /* ViewController.swift */; };
-		87697E9428A655CA00551B91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87697E9228A655CA00551B91 /* Main.storyboard */; };
 		87697E9628A655CB00551B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87697E9528A655CB00551B91 /* Assets.xcassets */; };
 		87697E9928A655CB00551B91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87697E9728A655CB00551B91 /* LaunchScreen.storyboard */; };
 		87697EA428A655CB00551B91 /* TMDB_LISTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EA328A655CB00551B91 /* TMDB_LISTTests.swift */; };
 		87697EAE28A655CB00551B91 /* TMDB_LISTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EAD28A655CB00551B91 /* TMDB_LISTUITests.swift */; };
 		87697EB028A655CB00551B91 /* TMDB_LISTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EAF28A655CB00551B91 /* TMDB_LISTUITestsLaunchTests.swift */; };
+		87697EBF28A65C1C00551B91 /* TMDBTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */; };
+		87697EC128A65C8500551B91 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC028A65C8500551B91 /* VideoViewController.swift */; };
+		87697EC328A65CB500551B91 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC228A65CB500551B91 /* SearchViewController.swift */; };
+		87697EC528A65CE200551B91 /* CommingSonnViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */; };
+		87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC628A65D5E00551B91 /* DownloadViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +50,6 @@
 		87697E8C28A655CA00551B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87697E8E28A655CA00551B91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		87697E9028A655CA00551B91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		87697E9328A655CA00551B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87697E9528A655CB00551B91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87697E9828A655CB00551B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87697E9A28A655CB00551B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +58,11 @@
 		87697EA928A655CB00551B91 /* TMDB_LISTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDB_LISTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87697EAD28A655CB00551B91 /* TMDB_LISTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_LISTUITests.swift; sourceTree = "<group>"; };
 		87697EAF28A655CB00551B91 /* TMDB_LISTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_LISTUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBTabBarViewController.swift; sourceTree = "<group>"; };
+		87697EC028A65C8500551B91 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		87697EC228A65CB500551B91 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommingSonnViewController copy.swift"; sourceTree = "<group>"; };
+		87697EC628A65D5E00551B91 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +109,6 @@
 				8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */,
 				FBABC4AF6C8C24C36AA3302D /* Pods-TMDB_LISTTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -118,6 +125,7 @@
 		87697E8028A655CA00551B91 = {
 			isa = PBXGroup;
 			children = (
+				87697EBC28A65A8C00551B91 /* Resources */,
 				87697E8B28A655CA00551B91 /* TMDB_LIST */,
 				87697EA228A655CB00551B91 /* TMDB_LISTTests */,
 				87697EAC28A655CB00551B91 /* TMDB_LISTUITests */,
@@ -140,13 +148,8 @@
 		87697E8B28A655CA00551B91 /* TMDB_LIST */ = {
 			isa = PBXGroup;
 			children = (
-				87697E8C28A655CA00551B91 /* AppDelegate.swift */,
-				87697E8E28A655CA00551B91 /* SceneDelegate.swift */,
+				87697EBD28A65BE100551B91 /* Controllers */,
 				87697E9028A655CA00551B91 /* ViewController.swift */,
-				87697E9228A655CA00551B91 /* Main.storyboard */,
-				87697E9528A655CB00551B91 /* Assets.xcassets */,
-				87697E9728A655CB00551B91 /* LaunchScreen.storyboard */,
-				87697E9A28A655CB00551B91 /* Info.plist */,
 			);
 			path = TMDB_LIST;
 			sourceTree = "<group>";
@@ -166,6 +169,30 @@
 				87697EAF28A655CB00551B91 /* TMDB_LISTUITestsLaunchTests.swift */,
 			);
 			path = TMDB_LISTUITests;
+			sourceTree = "<group>";
+		};
+		87697EBC28A65A8C00551B91 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				87697E8C28A655CA00551B91 /* AppDelegate.swift */,
+				87697E8E28A655CA00551B91 /* SceneDelegate.swift */,
+				87697E9528A655CB00551B91 /* Assets.xcassets */,
+				87697E9728A655CB00551B91 /* LaunchScreen.storyboard */,
+				87697E9A28A655CB00551B91 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		87697EBD28A65BE100551B91 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */,
+				87697EC028A65C8500551B91 /* VideoViewController.swift */,
+				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
+				87697EC228A65CB500551B91 /* SearchViewController.swift */,
+				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +306,6 @@
 			files = (
 				87697E9928A655CB00551B91 /* LaunchScreen.storyboard in Resources */,
 				87697E9628A655CB00551B91 /* Assets.xcassets in Resources */,
-				87697E9428A655CA00551B91 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,9 +433,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87697EC528A65CE200551B91 /* CommingSonnViewController copy.swift in Sources */,
+				87697EC328A65CB500551B91 /* SearchViewController.swift in Sources */,
 				87697E9128A655CA00551B91 /* ViewController.swift in Sources */,
 				87697E8D28A655CA00551B91 /* AppDelegate.swift in Sources */,
 				87697E8F28A655CA00551B91 /* SceneDelegate.swift in Sources */,
+				87697EC128A65C8500551B91 /* VideoViewController.swift in Sources */,
+				87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */,
+				87697EBF28A65C1C00551B91 /* TMDBTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,14 +477,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		87697E9228A655CA00551B91 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87697E9328A655CA00551B91 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		87697E9728A655CB00551B91 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -589,10 +612,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TMDB_LIST/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -618,10 +641,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TMDB_LIST/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
