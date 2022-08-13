@@ -23,20 +23,29 @@ final class VideoViewController: UIViewController {
         return $0
     }(UITableView(frame: .zero, style: .grouped))
     
+    private var videoHeaderView: VideoHeaderView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupLayout()
         self.configureNavigationBar()
         
-        self.tableView.tableHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        self.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        self.tableView.tableHeaderView = self.videoHeaderView
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.tableView.frame = self.view.bounds
+        self.configureHeaderView()
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        self.tableView.frame = self.view.bounds
+//    }
 }
 
 extension VideoViewController {
@@ -45,18 +54,39 @@ extension VideoViewController {
         self.view.addSubview(self.tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     private func configureNavigationBar() {
         let image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
-        
+
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         ]
         
         self.navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func configureHeaderView() {
+        SimpleAPI.shared.movies { [weak self] result in
+            switch result {
+            case .success(let movies):
+                guard let movieModel = movies.randomElement() else { return }
+
+                let movieViewModel = MovieViewModel(movieModel: movieModel)
+                
+                DispatchQueue.main.async {
+                    self?.videoHeaderView?.configure(with: movieViewModel)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

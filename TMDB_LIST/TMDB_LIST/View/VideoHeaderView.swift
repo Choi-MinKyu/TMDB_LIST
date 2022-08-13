@@ -27,7 +27,7 @@ final class VideoHeaderView: UIView {
         return $0
     }(UIButton())
     
-    private let videoImageView: UIImageView = {
+    private let thumbnailImageView: UIImageView = {
         $0.image = UIImage(named: "videoImage")
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -45,17 +45,23 @@ final class VideoHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    func configure(with movieViewModel: MovieViewModel) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movieViewModel.thumnailImageURL())") else { return }
+        
+        self.thumbnailImageView.kf.setImage(with: url)
+    }
 }
 
 extension VideoHeaderView {
     private func setupUI() {
-        self.addSubview(self.videoImageView)
+        self.addSubview(self.thumbnailImageView)
         self.addSubview(self.playButton)
         self.addSubview(self.downloadButton)
     }
     
     private func setupConstraints() {
-        self.videoImageView.snp.makeConstraints {
+        self.thumbnailImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
