@@ -18,6 +18,12 @@ final class VideoViewController: UIViewController {
         case CommingSoon
         case TopRates
     }
+    
+    private enum Constants {
+        static let cellHeight: CGFloat = 200
+        static let headerCellHeight: CGFloat = 40
+        static let headerViewHeight: CGFloat = 500
+    }
 
     private let tableView: UITableView = {
         $0.register(CollectionViewTableViewCEll.self, forCellReuseIdentifier: CollectionViewTableViewCEll.identifier)
@@ -32,7 +38,7 @@ final class VideoViewController: UIViewController {
         self.setupLayout()
         self.configureNavigationBar()
         
-        self.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        self.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: Constants.headerViewHeight))
         self.tableView.tableHeaderView = self.videoHeaderView
     }
     
@@ -42,28 +48,27 @@ final class VideoViewController: UIViewController {
         self.configureHeaderView()
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//        self.tableView.frame = self.view.bounds
-//    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.tableView.frame = self.view.bounds
+    }
 }
 
 extension VideoViewController {
     private func setupLayout() {
         self.view.backgroundColor = .systemBackground
-        self.view.addSubview(self.tableView)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         
-        self.tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+        _ = {
+            self.view.addSubview($0)
+            $0.delegate = self
+            $0.dataSource = self
+        }(self.tableView)
     }
     
     private func configureNavigationBar() {
-//        let image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        let logoImage = UIImage(named: "LOGO")?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: logoImage, style: .done, target: self, action: nil)
        
         let personButton = UIButton(type: .system)
         personButton.setImage(UIImage(systemName: "person.circle"), for: .normal)
@@ -110,6 +115,8 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCEll.identifier, for: indexPath) as! CollectionViewTableViewCEll
+        
+        cell.delegate = self
         
         switch indexPath.section {
         case Section.Movie.rawValue:
@@ -181,11 +188,11 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        Constants.cellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        40
+        Constants.headerCellHeight
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -198,5 +205,23 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sectionTitles[section]
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = self.view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+
+        self.navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
+        
+    }
+}
+
+extension VideoViewController: CollectionViewTableViewCEllDelegate {
+    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
+        DispatchQueue.main.async {
+            let detailViewController = VideoDetailViewController()
+            detailViewController.configure(with: viewModel)
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }

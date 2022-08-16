@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol CollectionViewTableViewCEllDelegate: AnyObject {
+    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel)
+}
+
 final class CollectionViewTableViewCEll: UITableViewCell {
     static let identifier = "CollectionViewTableViewCellCollectionViewCell"
     
     private var viewModels = [MovieViewModel]()
+    
+    weak var delegate: CollectionViewTableViewCEllDelegate?
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         $0.scrollDirection = .horizontal
@@ -63,5 +69,26 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
         cell.configure(with: self.viewModels[indexPath.row])
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let movieModel = self.viewModels[indexPath.item]
+        
+        let titleName = movieModel.titleName.isEmpty ? movieModel.title : movieModel.titleName
+        
+        SimpleAPI.shared.youtube(with: titleName) { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .success(let videoElement):
+                guard !movieModel.overView.isEmpty else { return }
+                let youtubeViewModel = YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView)
+                self.delegate?.CollectionViewTableViewCEllDidTapCell(self, viewModel: youtubeViewModel)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
