@@ -27,6 +27,15 @@ final class VideoHeaderView: UIView {
         return $0
     }(UIButton())
     
+    private let dibsButton: UIButton = {
+        $0.setTitle("내가 찜한 컨텐츠", for: .normal)
+        $0.layer.borderColor = UIColor.white.cgColor
+        $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = 1
+        
+        return $0
+    }(UIButton())
+    
     private let thumbnailImageView: UIImageView = {
         $0.image = UIImage(named: "videoImage")
         $0.contentMode = .scaleAspectFill
@@ -56,6 +65,7 @@ final class VideoHeaderView: UIView {
 extension VideoHeaderView {
     private func setupUI() {
         self.addSubview(self.thumbnailImageView)
+        self.addSubview(self.dibsButton)
         self.addSubview(self.playButton)
         self.addSubview(self.downloadButton)
     }
@@ -65,14 +75,20 @@ extension VideoHeaderView {
             $0.edges.equalToSuperview()
         }
         
+        self.dibsButton.snp.makeConstraints {
+            $0.trailing.equalTo(self.playButton.snp.leading).offset(-10)
+            $0.width.equalTo(120)
+            $0.bottom.equalToSuperview().offset(-10)
+        }
+        
         self.playButton.snp.makeConstraints {
-            $0.trailing.equalTo(self.snp.centerX).offset(-10)
+            $0.centerX.equalTo(self.snp.centerX)
             $0.width.equalTo(120)
             $0.bottom.equalToSuperview().offset(-10)
         }
         
         self.downloadButton.snp.makeConstraints {
-            $0.leading.equalTo(self.snp.centerX).offset(10)
+            $0.leading.equalTo(self.playButton.snp.trailing).offset(10)
             $0.width.equalTo(120)
             $0.bottom.equalToSuperview().offset(-10)
         }
