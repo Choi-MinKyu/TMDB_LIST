@@ -30,6 +30,7 @@
 		87697ED428A6EA8E00551B91 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ED328A6EA8E00551B91 /* MovieModel.swift */; };
 		87697ED628A6EEE100551B91 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ED528A6EEE100551B91 /* MovieViewModel.swift */; };
 		87697ED928AB3F7700551B91 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ED828AB3F7700551B91 /* SearchTableViewCell.swift */; };
+		87697EDB28AB52F300551B91 /* SearchedMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		87697ED328A6EA8E00551B91 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		87697ED528A6EEE100551B91 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		87697ED828AB3F7700551B91 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedMovieViewController.swift; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +211,7 @@
 				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
 				87697EC228A65CB500551B91 /* SearchViewController.swift */,
 				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
+				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				87697EC128A65C8500551B91 /* VideoViewController.swift in Sources */,
 				87697ECC28A663D500551B91 /* TitleCollectionViewCell.swift in Sources */,
 				87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */,
+				87697EDB28AB52F300551B91 /* SearchedMovieViewController.swift in Sources */,
 				87697EBF28A65C1C00551B91 /* TMDBTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

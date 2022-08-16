@@ -22,7 +22,7 @@ final class SearchViewController: UIViewController {
         $0.searchBar.searchBarStyle = .minimal
         
         return $0
-    }(UISearchController(searchResultsController: nil))
+    }(UISearchController(searchResultsController: SearchedMovieViewController()))
     
     enum Constants {
         static let cellHeight: CGFloat = 160
@@ -107,14 +107,18 @@ extension SearchViewController: UISearchResultsUpdating {
         guard let seardedQuery = searchBar.text,
               !seardedQuery.trimmingCharacters(in: .whitespaces).isEmpty,
               seardedQuery.trimmingCharacters(in: .whitespaces).count >= 2,
-              let resultController = searchController.searchResultsController else {
+              let searchedMovieViewController = searchController.searchResultsController as? SearchedMovieViewController else {
             return
         }
         
         SimpleAPI.shared.search(with: seardedQuery) {
             switch $0 {
             case .success(let movies):
-                print(movies)
+                searchedMovieViewController.movies = movies
+                
+                DispatchQueue.main.async {
+                    searchedMovieViewController.searchedMovieCollectionView.reloadData()
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
