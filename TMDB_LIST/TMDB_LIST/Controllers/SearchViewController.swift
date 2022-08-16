@@ -8,12 +8,12 @@
 import UIKit
 
 final class SearchViewController: UIViewController {
-
-    private var movies = [MovieModel]()
+    
+    private var movies = [MovieViewModel]()
     
     private let tableView: UITableView = {
         $0.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
-
+        
         return $0
     }(UITableView())
     
@@ -27,10 +27,10 @@ final class SearchViewController: UIViewController {
     enum Constants {
         static let cellHeight: CGFloat = 160
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setupLayout()
     }
     
@@ -40,7 +40,7 @@ final class SearchViewController: UIViewController {
         self.tableView.frame = self.view.bounds
         self.fetchMovies()
     }
-
+    
 }
 
 extension SearchViewController {
@@ -66,11 +66,16 @@ extension SearchViewController {
     
     private func fetchMovies() {
         SimpleAPI.shared.searchDefault { [weak self] in
+            guard let self = self else { return }
+            
             switch $0 {
             case .success(let movies):
-                self?.movies = movies
+                self.movies = movies.map {
+                    MovieViewModel(movieModel: $0)
+                }
+                
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -87,8 +92,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         
-        let movieModel = movies[indexPath.row]
-        let movieViewModel = MovieViewModel(movieModel: movieModel)
+        let movieViewModel = movies[indexPath.row]
         
         cell.configure(with: movieViewModel)
         
@@ -97,6 +101,31 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         Constants.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let movieModel = self.movies[indexPath.item]
+        
+        let titleName = movieModel.titleName.isEmpty ? movieModel.title : movieModel.titleName
+        
+        SimpleAPI.shared.youtube(with: titleName) { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .success(let videoElement):
+                let detailViewController = VideoDetailViewController()
+                detailViewController.configure(with: YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView))
+                
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(detailViewController, animated: true)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -111,10 +140,14 @@ extension SearchViewController: UISearchResultsUpdating {
             return
         }
         
+        searchedMovieViewController.delegate = self
+        
         SimpleAPI.shared.search(with: seardedQuery) {
             switch $0 {
             case .success(let movies):
-                searchedMovieViewController.movies = movies
+                searchedMovieViewController.movies = movies.map {
+                    MovieViewModel(movieModel: $0)
+                }
                 
                 DispatchQueue.main.async {
                     searchedMovieViewController.searchedMovieCollectionView.reloadData()
@@ -122,6 +155,17 @@ extension SearchViewController: UISearchResultsUpdating {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+}
+
+extension SearchViewController: SearchedMovieViewControllerDelegate {
+    func searchedMovieViewControllerDidTapItem(_ viewModel: YoutubeSearchViewModel) {
+        
+        DispatchQueue.main.async {
+            let detailViewController = VideoDetailViewController()
+            detailViewController.configure(with: viewModel)
+            self.navigationController?.pushViewController(detailViewController, animated: true)            
         }
     }
 }
