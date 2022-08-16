@@ -10,11 +10,11 @@ import Foundation
 struct MovieViewModel {
     let movieModel: MovieModel
     
-    func titleName() -> String {
+    var titleName: String {
         self.movieModel.original_title ?? ""
     }
     
-    func thumnailImageURL() -> String {
+    var thumbnailImageUrl: String {
         self.movieModel.poster_path ?? ""
     }
 }

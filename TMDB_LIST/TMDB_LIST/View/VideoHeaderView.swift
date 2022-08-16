@@ -47,7 +47,7 @@ final class VideoHeaderView: UIView {
     }
     
     func configure(with movieViewModel: MovieViewModel) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movieViewModel.thumnailImageURL())") else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movieViewModel.thumbnailImageUrl)") else { return }
         
         self.thumbnailImageView.kf.setImage(with: url)
     }

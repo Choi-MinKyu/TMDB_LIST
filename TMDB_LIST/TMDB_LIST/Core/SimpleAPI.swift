@@ -116,3 +116,46 @@ final class SimpleAPI {
         task.resume()
     }
 }
+
+extension SimpleAPI {
+    func searchDefault(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/discover/movie?api_key=\(Constants.apiKey)&language=ko-KR&sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_watch_monetization_types=flatrate") else { return }
+        
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else { return }
+            
+            do {
+                let result = try JSONDecoder().decode(Movies.self, from: data)
+                completion(.success(result.results))
+            } catch {
+                completion(.failure(APIError.failed))
+            }
+        }
+        
+        task.resume()
+    }
+
+    func search(with query: String, completion: @escaping (Result<[MovieModel], Error>) -> Void) {
+        
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let url = URL(string: "\(Constants.baseUrl)/3/search/movie?api_key=\(Constants.apiKey)&query=\(query)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(Movies.self, from: data)
+                completion(.success(results.results))
+
+            } catch {
+                completion(.failure(APIError.failed))
+            }
+
+        }
+        task.resume()
+    }
+}
