@@ -10,6 +10,8 @@ import UIKit
 final class CollectionViewTableViewCEll: UITableViewCell {
     static let identifier = "CollectionViewTableViewCellCollectionViewCell"
     
+    private var viewModels = [MovieViewModel]()
+    
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         $0.scrollDirection = .horizontal
         $0.itemSize = CGSize(width: 140, height: 200)
@@ -24,6 +26,7 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.contentView.addSubview(self.collectionView)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -37,11 +40,19 @@ final class CollectionViewTableViewCEll: UITableViewCell {
         
         self.collectionView.frame = self.contentView.bounds
     }
+    
+    func configure(with viewModels: [MovieViewModel]) {
+        self.viewModels = viewModels
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
 }
 
 extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,7 +60,7 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
-        cell.configure(with: "Harry Poter")
+        cell.configure(with: self.viewModels[indexPath.row])
 
         return cell
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class VideoViewController: UIViewController {
     fileprivate let sectionTitles = ["영화", "TV", "Popular", "Comming Soon", "지금 뜨는 컨텐츠"]
@@ -61,12 +62,20 @@ extension VideoViewController {
     }
     
     private func configureNavigationBar() {
-        let image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
-
+//        let image = UIImage(named: "logo")?.withRenderingMode(.alwaysOriginal)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+       
+        let personButton = UIButton(type: .system)
+        personButton.setImage(UIImage(systemName: "person.circle"), for: .normal)
+        let person = UIBarButtonItem(customView: personButton)
+        
+        let playButton = UIButton(type: .system)
+        playButton.setImage(UIImage(systemName: "play.rectangle"), for: .normal)
+        let play = UIBarButtonItem(customView: playButton)
+        
         self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
+            person,
+            play,
         ]
         
         self.navigationController?.navigationBar.tintColor = .white
@@ -104,7 +113,18 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case Section.Movie.rawValue:
-            break
+            SimpleAPI.shared.movies {
+                switch $0 {
+                case .success(let movies):
+                    let movieViewModels = movies.map {
+                        MovieViewModel(movieModel: $0)
+                    }
+                    
+                    cell.configure(with: movieViewModels)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         case Section.TV.rawValue:
             break
         case Section.Popular.rawValue:
