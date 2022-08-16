@@ -19,21 +19,25 @@ final class TMDBTabBarViewController: UITabBarController {
         let searchViewControllerNavi = UINavigationController(rootViewController: SearchViewController())
         let downloadViewControllerNavi = UINavigationController(rootViewController: DownloadViewController())
         
-//        {
-        videoViewControllerNavi.tabBarItem.image = UIImage(systemName: "video")
-        videoViewControllerNavi.title = "Video"
-//        }(videoViewControllerNavi)
+        _ = {
+            $0.tabBarItem.image = UIImage(systemName: "video")
+            $0.title = "Video"
+        }(videoViewControllerNavi)
 
-//        {
-        commingSoonViewControllerNavi.tabBarItem.image = UIImage(systemName: "play.circle")
-        commingSoonViewControllerNavi.title = "Coming Soon"
-//        }(commingSoonViewControllerNavi)
+        _ = {
+            $0.tabBarItem.image = UIImage(systemName: "play.circle")
+            $0.title = "Coming Soon"
+        }(commingSoonViewControllerNavi)
         
-        searchViewControllerNavi.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        searchViewControllerNavi.title = "Search"
+        _ = {
+            $0.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+            $0.title = "Search"
+        }(searchViewControllerNavi)
 
-        downloadViewControllerNavi.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
-        downloadViewControllerNavi.title = "Download"
+        _ = {
+            $0.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
+            $0.title = "Download"
+        }(downloadViewControllerNavi)
         
         self.tabBar.tintColor = .label
         
