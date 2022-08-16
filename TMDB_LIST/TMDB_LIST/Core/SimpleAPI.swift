@@ -15,6 +15,8 @@ final class SimpleAPI {
         // PW : qwer????
         static let apiKey = "7c74f5559350c8f3ee33a106b0b6bf84"
         static let baseUrl = "https://api.themoviedb.org"
+        static let youtubeApiKey = "AIzaSyBHPh7Z91Mz-SRirVbtKmEpWkBy7gKJOKA"
+        static let youtubeBaseUrl = "https://www.googleapis.com/youtube/v3/search?"
     }
     
     enum APIError: Error {
@@ -150,6 +152,29 @@ extension SimpleAPI {
             do {
                 let results = try JSONDecoder().decode(Movies.self, from: data)
                 completion(.success(results.results))
+
+            } catch {
+                completion(.failure(APIError.failed))
+            }
+
+        }
+        task.resume()
+    }
+    
+    func youtube(with query: String, completion: @escaping (Result<VideoElement, Error>) -> Void) {
+        let trailer = query + " trailer"
+        
+        guard let query = trailer.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let url = URL(string: "\(Constants.youtubeBaseUrl)q=\(query)&key=\(Constants.youtubeApiKey)") else {return}
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(YoutubeSearchModel.self, from: data)
+                completion(.success(results.items[0]))
 
             } catch {
                 completion(.failure(APIError.failed))

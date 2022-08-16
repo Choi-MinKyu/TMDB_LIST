@@ -116,6 +116,8 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCEll.identifier, for: indexPath) as! CollectionViewTableViewCEll
         
+        cell.delegate = self
+        
         switch indexPath.section {
         case Section.Movie.rawValue:
             SimpleAPI.shared.movies {
@@ -211,5 +213,15 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
 
         self.navigationController?.navigationBar.transform = .init(translationX: 0, y: -offset)
         
+    }
+}
+
+extension VideoViewController: CollectionViewTableViewCEllDelegate {
+    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
+        DispatchQueue.main.async {
+            let detailViewController = VideoDetailViewController()
+            detailViewController.configure(with: viewModel)
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }
