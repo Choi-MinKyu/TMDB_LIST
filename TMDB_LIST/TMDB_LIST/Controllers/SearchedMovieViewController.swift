@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol SearchedMovieViewControllerDelegate: AnyObject {
+    func searchedMovieViewControllerDidTapItem(_ viewModel: YoutubeSearchViewModel)
+}
+
 final class SearchedMovieViewController: UIViewController {
-    var movies = [MovieModel]()
+    var movies = [MovieViewModel]()
+    
+    weak var delegate: SearchedMovieViewControllerDelegate?
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         $0.itemSize = CGSize(width: UIScreen.main.bounds.width / 3 - 10, height: 200)
@@ -54,7 +60,7 @@ extension SearchedMovieViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as! TitleCollectionViewCell
-        let movieViewModel = MovieViewModel(movieModel: movies[indexPath.row])
+        let movieViewModel = self.movies[indexPath.item]
 
         cell.configure(with: movieViewModel)
 
@@ -64,8 +70,18 @@ extension SearchedMovieViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let movie = movies[indexPath.row]
-        let movieViewModel = MovieViewModel(movieModel: movie)
-        print(movieViewModel.titleName)
+        let movieViewModel = self.movies[indexPath.item]
+        let titleName = movieViewModel.titleName.isEmpty ? movieViewModel.title : movieViewModel.titleName
+        
+        SimpleAPI.shared.youtube(with: titleName) { [weak self] in
+            switch $0 {
+            case .success(let videoElement):
+                self?.delegate?.searchedMovieViewControllerDidTapItem(YoutubeSearchViewModel(title: movieViewModel.titleName, youtubeViewElement: videoElement, overView: movieViewModel.overView))
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
 }

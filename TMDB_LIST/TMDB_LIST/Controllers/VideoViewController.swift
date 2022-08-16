@@ -218,9 +218,10 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension VideoViewController: CollectionViewTableViewCEllDelegate {
     func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
+        let detailViewController = VideoDetailViewController()
+        detailViewController.configure(with: viewModel)
+        
         DispatchQueue.main.async {
-            let detailViewController = VideoDetailViewController()
-            detailViewController.configure(with: viewModel)
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
