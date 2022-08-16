@@ -210,14 +210,8 @@
 		87697EC828A6623600551B91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				87697EE728ABBC8E00551B91 /* Controller */,
 				87697EE428AB966B00551B91 /* Cell */,
-				87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */,
-				87697EC028A65C8500551B91 /* VideoViewController.swift */,
-				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
-				87697EC228A65CB500551B91 /* SearchViewController.swift */,
-				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
-				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
-				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -274,6 +268,20 @@
 			children = (
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		87697EE728ABBC8E00551B91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */,
+				87697EC028A65C8500551B91 /* VideoViewController.swift */,
+				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
+				87697EC228A65CB500551B91 /* SearchViewController.swift */,
+				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
+				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
+				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
