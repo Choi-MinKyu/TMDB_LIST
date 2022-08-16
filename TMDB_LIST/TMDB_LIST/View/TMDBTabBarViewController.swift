@@ -21,7 +21,7 @@ final class TMDBTabBarViewController: UITabBarController {
         
         _ = {
             $0.tabBarItem.image = UIImage(systemName: "video")
-            $0.title = "Video"
+            $0.title = "비디오"
         }(videoViewControllerNavi)
 
         _ = {
@@ -31,12 +31,12 @@ final class TMDBTabBarViewController: UITabBarController {
         
         _ = {
             $0.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-            $0.title = "Search"
+            $0.title = "검색"
         }(searchViewControllerNavi)
 
         _ = {
             $0.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
-            $0.title = "Download"
+            $0.title = "다운로드"
         }(downloadViewControllerNavi)
         
         self.tabBar.tintColor = .label
