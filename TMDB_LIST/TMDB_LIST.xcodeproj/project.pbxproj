@@ -215,9 +215,9 @@
 				87697EC028A65C8500551B91 /* VideoViewController.swift */,
 				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
 				87697EC228A65CB500551B91 /* SearchViewController.swift */,
+				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
 				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
 				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
-				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
