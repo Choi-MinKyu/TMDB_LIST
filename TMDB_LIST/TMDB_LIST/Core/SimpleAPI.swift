@@ -77,4 +77,23 @@ final class SimpleAPI {
         
         task.resume()
     }
+    
+    func commingSoon(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/upcoming?api_key=\(Constants.apiKey)&language=en-US&page=1") else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(Movies.self, from: data)
+                completion(.success(results.results))
+            } catch {
+                completion(.failure(APIError.failed))
+            }
+        }
+        
+        task.resume()
+    }
 }
