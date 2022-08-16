@@ -162,7 +162,17 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case Section.TopRates.rawValue:
-            break
+            SimpleAPI.shared.topRates {
+                switch $0 {
+                case .success(let movies):
+                    let tvViewModels = movies.map {
+                        MovieViewModel(movieModel: $0)
+                    }
+                    cell.configure(with: tvViewModels)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         default:
             fatalError()
         }
