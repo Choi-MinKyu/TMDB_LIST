@@ -16,6 +16,10 @@ final class SearchViewController: UIViewController {
 
         return $0
     }(UITableView())
+    
+    enum Constants {
+        static let cellHeight: CGFloat = 160
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +85,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        140
+        Constants.cellHeight
     }
 }
