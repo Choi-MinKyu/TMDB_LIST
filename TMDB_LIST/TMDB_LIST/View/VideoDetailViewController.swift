@@ -48,7 +48,9 @@ extension VideoDetailViewController {
         
         guard let url = URL(string: "https://www.youtube.com/embed/\(viewModel.youtubeViewElement.id.videoId)") else { return }
         
-        self.webView.load(URLRequest(url: url))
+        DispatchQueue.main.async {
+            self.webView.load(URLRequest(url: url))            
+        }
     }
 }
 

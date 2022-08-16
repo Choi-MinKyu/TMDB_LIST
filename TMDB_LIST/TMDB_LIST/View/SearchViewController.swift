@@ -115,10 +115,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             
             switch $0 {
             case .success(let videoElement):
-                let detailViewController = VideoDetailViewController()
-                detailViewController.configure(with: YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView))
                 
                 DispatchQueue.main.async {
+                    let detailViewController = VideoDetailViewController()
+                    detailViewController.configure(with: YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView))
                     self.navigationController?.pushViewController(detailViewController, animated: true)
                 }
                 
