@@ -35,8 +35,7 @@ final class TitleCollectionViewCell: UICollectionViewCell {
 
 extension TitleCollectionViewCell {
     func configure(with viewModel: MovieViewModel) {
-        let movieTitle = viewModel.thumnailImageURL()
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movieTitle)") else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(viewModel.thumbnailImageUrl)") else { return }
         
         self.thumbnailImageView.kf.setImage(with: url)
     }
