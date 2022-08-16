@@ -17,6 +17,13 @@ final class SearchViewController: UIViewController {
         return $0
     }(UITableView())
     
+    private let searchController: UISearchController = {
+        $0.searchBar.placeholder = "영화 또는 TV 타이틀을 입력하세요..."
+        $0.searchBar.searchBarStyle = .minimal
+        
+        return $0
+    }(UISearchController(searchResultsController: nil))
+    
     enum Constants {
         static let cellHeight: CGFloat = 160
     }
@@ -25,7 +32,6 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         self.setupLayout()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,8 +52,13 @@ extension SearchViewController {
         }(self.tableView, self.view, self)
         
         _ = {
+            $0.searchResultsUpdater = self
+        }(self.searchController)
+        
+        _ = {
             $0.title = $1
-            $2?.navigationItem.largeTitleDisplayMode = .always
+            $0.navigationItem.largeTitleDisplayMode = .always
+            $0.navigationItem.searchController = self.searchController
             $2?.navigationBar.prefersLargeTitles = true
             $2?.navigationBar.tintColor = .white
         }(self, "Search", self.navigationController)
@@ -86,5 +97,27 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         Constants.cellHeight
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        guard let seardedQuery = searchBar.text,
+              !seardedQuery.trimmingCharacters(in: .whitespaces).isEmpty,
+              seardedQuery.trimmingCharacters(in: .whitespaces).count >= 2,
+              let resultController = searchController.searchResultsController else {
+            return
+        }
+        
+        SimpleAPI.shared.search(with: seardedQuery) {
+            switch $0 {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
