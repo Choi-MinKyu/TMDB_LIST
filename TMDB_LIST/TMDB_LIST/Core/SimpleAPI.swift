@@ -39,4 +39,23 @@ final class SimpleAPI {
         
         task.resume()
     }
+    
+    func tv(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/trending/tv/day?api_key=\(Constants.apiKey)") else {return}
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode(Movies.self, from: data)
+                completion(.success(results.results))
+            } catch {
+                completion(.failure(APIError.failed))
+            }
+        }
+        
+        task.resume()
+    }
 }
