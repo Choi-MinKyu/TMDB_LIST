@@ -170,7 +170,7 @@
 		87697E8B28A655CA00551B91 /* TMDB_LIST */ = {
 			isa = PBXGroup;
 			children = (
-				87697ECF28A6E63600551B91 /* Core */,
+				87697EE528ABBC4E00551B91 /* Modules */,
 				87697ED228A6EA8000551B91 /* Model */,
 				87697ED728A6EEEA00551B91 /* ViewModel */,
 				87697EC828A6623600551B91 /* View */,
@@ -258,6 +258,22 @@
 				87697EDC28AB6B5600551B91 /* MovieTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		87697EE528ABBC4E00551B91 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				87697ECF28A6E63600551B91 /* Core */,
+				87697EE628ABBC5A00551B91 /* Extension */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		87697EE628ABBC5A00551B91 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
