@@ -60,7 +60,7 @@ final class SimpleAPI {
     }
     
     func popular(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/popular?api_key=\(Constants.apiKey)&language=en-US&page=1") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/popular?api_key=\(Constants.apiKey)&language=ko-KR&page=1") else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
@@ -79,7 +79,7 @@ final class SimpleAPI {
     }
     
     func commingSoon(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/upcoming?api_key=\(Constants.apiKey)&language=en-US&page=1") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/upcoming?api_key=\(Constants.apiKey)&language=ko-KR&page=1") else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
@@ -98,7 +98,7 @@ final class SimpleAPI {
     }
     
     func topRates(completion: @escaping (Result<[MovieModel], Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/top_rated?api_key=\(Constants.apiKey)&language=en-US&page=1") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/top_rated?api_key=\(Constants.apiKey)&language=ko-KR&page=1") else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
