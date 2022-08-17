@@ -108,3 +108,5 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,cocoapods
 
 TMDB_LIST/.DS_Store
+
+TMDB_LIST/Resources/.DS_Store
