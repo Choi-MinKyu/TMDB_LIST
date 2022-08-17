@@ -40,6 +40,7 @@
 		87697EF628AC8E0100551B91 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EF528AC8E0100551B91 /* NotificationViewController.swift */; };
 		87697EF928AC8E0100551B91 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87697EF728AC8E0100551B91 /* MainInterface.storyboard */; };
 		87697EFD28AC8E0100551B91 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 87697EEF28AC8E0100551B91 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		87697F0328AD0BB300551B91 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697F0228AD0BB300551B91 /* Array+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		87697EF528AC8E0100551B91 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		87697EF828AC8E0100551B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		87697EFA28AC8E0100551B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87697F0228AD0BB300551B91 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -316,6 +318,7 @@
 		87697EE628ABBC5A00551B91 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				87697F0228AD0BB300551B91 /* Array+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				87697ECA28A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift in Sources */,
 				87697ED628A6EEE100551B91 /* MovieViewModel.swift in Sources */,
 				87697ED428A6EA8E00551B91 /* MovieModel.swift in Sources */,
+				87697F0328AD0BB300551B91 /* Array+.swift in Sources */,
 				87697ED128A6E64B00551B91 /* SimpleAPI.swift in Sources */,
 				87697ED928AB3F7700551B91 /* SearchTableViewCell.swift in Sources */,
 				87697E8F28A655CA00551B91 /* SceneDelegate.swift in Sources */,

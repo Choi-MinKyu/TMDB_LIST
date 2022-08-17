@@ -66,7 +66,7 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
-        cell.configure(with: self.viewModels[indexPath.row])
+        cell.configure(with: self.viewModels[safe: indexPath.row])
 
         return cell
     }
@@ -93,7 +93,7 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
-        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let downloadActionButton = UIAction(title: "다운로드", state: .off) { _ in
                 print("Touch 3DButton")
             }

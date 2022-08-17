@@ -34,11 +34,11 @@ final class SearchTableViewCell: UITableViewCell {
 }
 
 extension SearchTableViewCell {
-    func configure(with model: MovieViewModel) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.thumbnailImageUrl)") else { return }
+    func configure(with model: MovieViewModel?) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model?.thumbnailImageUrl ?? "")") else { return }
         
         self.thumbnailImageView.kf.setImage(with: .network(url))
-        self.titleLabel.text = model.titleName
+        self.titleLabel.text = model?.titleName ?? ""
     }
 }
 

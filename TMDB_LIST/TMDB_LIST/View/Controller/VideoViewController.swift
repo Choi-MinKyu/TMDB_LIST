@@ -90,9 +90,7 @@ extension VideoViewController {
         SimpleAPI.shared.movies { [weak self] result in
             switch result {
             case .success(let movies):
-                guard let movieModel = movies.randomElement() else { return }
-
-                let movieViewModel = MovieViewModel(movieModel: movieModel)
+                let movieViewModel = MovieViewModel(movieModel: movies.randomElement())
                 
                 DispatchQueue.main.async {
                     self?.videoHeaderView?.configure(with: movieViewModel)

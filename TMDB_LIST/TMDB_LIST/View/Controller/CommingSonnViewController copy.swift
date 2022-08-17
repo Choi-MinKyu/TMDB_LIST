@@ -82,9 +82,7 @@ extension CommingSoonViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as! MovieTableViewCell
         
-        let movieModel = movies[indexPath.row]
-        let movieViewModel = MovieViewModel(movieModel: movieModel)
-        
+        let movieViewModel = MovieViewModel(movieModel: movies[safe: indexPath.row])
         cell.configure(with: movieViewModel)
         
         return cell
