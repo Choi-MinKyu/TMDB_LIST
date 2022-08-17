@@ -34,7 +34,7 @@
 		87697EDF28AB810600551B91 /* YoutubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EDE28AB810600551B91 /* YoutubeModel.swift */; };
 		87697EE128AB817600551B91 /* YoutubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EE028AB817600551B91 /* YoutubeViewModel.swift */; };
 		87697EE328AB877B00551B91 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EE228AB877B00551B91 /* VideoDetailViewController.swift */; };
-		87697EEA28ABEACF00551B91 /* first.apns in Resources */ = {isa = PBXBuildFile; fileRef = 87697EE928ABEACF00551B91 /* first.apns */; };
+		87697EEA28ABEACF00551B91 /* Notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = 87697EE928ABEACF00551B91 /* Notification.apns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 		87697EE028AB817600551B91 /* YoutubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewModel.swift; sourceTree = "<group>"; };
 		87697EE228AB877B00551B91 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		87697EE828ABE2FA00551B91 /* TMDB_LIST.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TMDB_LIST.entitlements; sourceTree = "<group>"; };
-		87697EE928ABEACF00551B91 /* first.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = first.apns; sourceTree = "<group>"; };
+		87697EE928ABEACF00551B91 /* Notification.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notification.apns; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +207,7 @@
 				87697E9528A655CB00551B91 /* Assets.xcassets */,
 				87697E9728A655CB00551B91 /* LaunchScreen.storyboard */,
 				87697E9A28A655CB00551B91 /* Info.plist */,
-				87697EE928ABEACF00551B91 /* first.apns */,
+				87697EE928ABEACF00551B91 /* Notification.apns */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87697EEA28ABEACF00551B91 /* first.apns in Resources */,
+				87697EEA28ABEACF00551B91 /* Notification.apns in Resources */,
 				87697E9928A655CB00551B91 /* LaunchScreen.storyboard in Resources */,
 				87697E9628A655CB00551B91 /* Assets.xcassets in Resources */,
 			);
