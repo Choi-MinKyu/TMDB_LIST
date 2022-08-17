@@ -3,9 +3,11 @@
         "alert": "Breaking News!",
         "sound": "default",
         "link_url": "https://raywenderlich.com",
-        "category": "NEWS_CATEGORY"
+        "category": "CustomSamplePush",
+        "mutable-content": 1
     },
     "data": {
+        "bannerUrl": "https://scontent-gmp1-1.xx.fbcdn.net/v/t1.6435-9/91433061_3102677403099489_2558380673832321024_n.png?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lWdhu-LzNeAAX8Civsx&_nc_ht=scontent-gmp1-1.xx&oh=00_AT_GorK3lkq8HgpXc6s2WTDlykwX1IV7d0IzsY2sJXC_Xg&oe=6320C254",
         "link": 2
     }
 }

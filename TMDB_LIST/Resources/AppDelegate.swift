@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     enum Identifiers {
       static let viewAction = "VIEW_IDENTIFIER"
-      static let newsCategory = "NEWS_CATEGORY"
+      static let newsCategory = "CustomSamplePush"
     }
 
     
