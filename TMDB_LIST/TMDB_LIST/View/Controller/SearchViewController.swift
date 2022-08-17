@@ -92,8 +92,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         
-        let movieViewModel = movies[indexPath.row]
-        
+        let movieViewModel = movies[safe: indexPath.row]
         cell.configure(with: movieViewModel)
         
         return cell
@@ -106,9 +105,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let movieModel = self.movies[indexPath.item]
+        let movieModel = self.movies[safe: indexPath.row]
         
-        let titleName = movieModel.titleName.isEmpty ? movieModel.title : movieModel.titleName
+        let titleName = (movieModel?.titleName.isEmpty ?? true) ? movieModel?.title ?? "" : movieModel?.titleName ?? ""
         
         SimpleAPI.shared.youtube(with: titleName) { [weak self] in
             guard let self = self else { return }
@@ -118,7 +117,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 DispatchQueue.main.async {
                     let detailViewController = VideoDetailViewController()
-                    detailViewController.configure(with: YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView))
+                    detailViewController.configure(with: YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel?.overView ?? ""))
                     self.navigationController?.pushViewController(detailViewController, animated: true)
                 }
                 

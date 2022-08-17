@@ -8,21 +8,21 @@
 import Foundation
 
 struct MovieViewModel {
-    let movieModel: MovieModel
+    let movieModel: MovieModel?
     
     var titleName: String {
-        self.movieModel.original_title ?? ""
+        self.movieModel?.original_title ?? ""
     }
     
     var title: String {
-        self.movieModel.title ?? ""
+        self.movieModel?.title ?? ""
     }
     
     var thumbnailImageUrl: String {
-        self.movieModel.poster_path ?? ""
+        self.movieModel?.poster_path ?? ""
     }
     
     var overView: String {
-        self.movieModel.overview ?? ""
+        self.movieModel?.overview ?? ""
     }
 }

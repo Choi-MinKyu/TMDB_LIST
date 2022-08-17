@@ -60,9 +60,8 @@ extension SearchedMovieViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as! TitleCollectionViewCell
-        let movieViewModel = self.movies[indexPath.item]
-
-        cell.configure(with: movieViewModel)
+        
+        cell.configure(with: self.movies[safe: indexPath.item])
 
         return cell
     }
