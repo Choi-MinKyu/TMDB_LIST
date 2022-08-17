@@ -10,6 +10,7 @@ import WebKit
 import SnapKit
 
 final class VideoDetailViewController: UIViewController {
+    private var prevOffset: CGFloat = 0
     private let titleLabel: UILabel = {
         $0.font = .systemFont(ofSize: 22, weight: .bold)
         return $0
@@ -38,6 +39,20 @@ final class VideoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.prevOffset = self.navigationController?.navigationBar.transform.ty ?? 0
+        
+        self.navigationController?.navigationBar.transform = .init(translationX: 0, y: 0)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.transform = .init(translationX: 0, y: self.prevOffset)
     }
 }
 
