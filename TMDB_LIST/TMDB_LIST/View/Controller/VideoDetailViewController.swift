@@ -67,7 +67,7 @@ extension VideoDetailViewController {
     
     private func setupConstraints() {
         self.webView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(25)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(350)
         }
