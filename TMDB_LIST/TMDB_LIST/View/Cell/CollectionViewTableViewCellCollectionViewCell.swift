@@ -91,4 +91,16 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            let downloadActionButton = UIAction(title: "다운로드", state: .off) { _ in
+                print("Touch 3DButton")
+            }
+            
+            return UIMenu(title: "", options: .displayInline, children: [downloadActionButton])
+        }
+        
+        return config
+    }
 }
