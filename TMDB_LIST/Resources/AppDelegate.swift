@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
+    enum Identifiers {
+      static let viewAction = "VIEW_IDENTIFIER"
+      static let newsCategory = "NEWS_CATEGORY"
+    }
 
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.registerForPushNotificatinos()
+        
         return true
     }
 
@@ -31,6 +40,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device token is: \(token)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error.localizedDescription)")
+    }
 }
 
+extension AppDelegate {
+    func registerForPushNotificatinos() {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+                print("Permission granted: \(granted)")
+                guard granted else { return }
+                let viewAction = UNNotificationAction(
+                    identifier: AppDelegate.Identifiers.viewAction,
+                    title: "View",
+                    options: [.foreground])
+
+                let newsCategory = UNNotificationCategory(
+                    identifier: AppDelegate.Identifiers.newsCategory,
+                    actions: [viewAction],
+                    intentIdentifiers: [],
+                    options: [])
+                
+                UNUserNotificationCenter.current().setNotificationCategories([newsCategory])
+                self?.getNotificationSettings()
+            }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings {
+            print("cmk notificatin Settings: \($0)")
+            
+            guard $0.authorizationStatus == .authorized else { return }
+            
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+    }
+}

@@ -22,6 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.windowScene = windowScene
         self.window?.rootViewController = TMDBTabBarViewController()
         self.window?.makeKeyAndVisible()
+        
+        UNUserNotificationCenter.current().delegate = self
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -55,3 +57,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            print("cmk Message Closed")
+        } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            print("cmk DEFAULT")
+            
+            if let data = userInfo["data"] as? [String: AnyObject], let link = data["link"] as? Int {
+                (window?.rootViewController as? UITabBarController)?.selectedIndex = link
+            }
+        }
+        
+        
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if #available(iOS 13.0, *) {
+            completionHandler([.alert, .badge, .sound])
+        } else {
+            completionHandler([.list, .banner, .badge, .sound])
+        }
+    }
+}

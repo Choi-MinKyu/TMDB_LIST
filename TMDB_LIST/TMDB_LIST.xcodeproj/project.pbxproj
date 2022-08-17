@@ -34,6 +34,7 @@
 		87697EDF28AB810600551B91 /* YoutubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EDE28AB810600551B91 /* YoutubeModel.swift */; };
 		87697EE128AB817600551B91 /* YoutubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EE028AB817600551B91 /* YoutubeViewModel.swift */; };
 		87697EE328AB877B00551B91 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EE228AB877B00551B91 /* VideoDetailViewController.swift */; };
+		87697EEA28ABEACF00551B91 /* first.apns in Resources */ = {isa = PBXBuildFile; fileRef = 87697EE928ABEACF00551B91 /* first.apns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		87697EDE28AB810600551B91 /* YoutubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeModel.swift; sourceTree = "<group>"; };
 		87697EE028AB817600551B91 /* YoutubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewModel.swift; sourceTree = "<group>"; };
 		87697EE228AB877B00551B91 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		87697EE828ABE2FA00551B91 /* TMDB_LIST.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TMDB_LIST.entitlements; sourceTree = "<group>"; };
+		87697EE928ABEACF00551B91 /* first.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = first.apns; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +173,8 @@
 		87697E8B28A655CA00551B91 /* TMDB_LIST */ = {
 			isa = PBXGroup;
 			children = (
-				87697ECF28A6E63600551B91 /* Core */,
+				87697EE828ABE2FA00551B91 /* TMDB_LIST.entitlements */,
+				87697EE528ABBC4E00551B91 /* Modules */,
 				87697ED228A6EA8000551B91 /* Model */,
 				87697ED728A6EEEA00551B91 /* ViewModel */,
 				87697EC828A6623600551B91 /* View */,
@@ -203,6 +207,7 @@
 				87697E9528A655CB00551B91 /* Assets.xcassets */,
 				87697E9728A655CB00551B91 /* LaunchScreen.storyboard */,
 				87697E9A28A655CB00551B91 /* Info.plist */,
+				87697EE928ABEACF00551B91 /* first.apns */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -210,14 +215,8 @@
 		87697EC828A6623600551B91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				87697EE728ABBC8E00551B91 /* Controller */,
 				87697EE428AB966B00551B91 /* Cell */,
-				87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */,
-				87697EC028A65C8500551B91 /* VideoViewController.swift */,
-				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
-				87697EC228A65CB500551B91 /* SearchViewController.swift */,
-				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
-				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
-				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -258,6 +257,36 @@
 				87697EDC28AB6B5600551B91 /* MovieTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		87697EE528ABBC4E00551B91 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				87697ECF28A6E63600551B91 /* Core */,
+				87697EE628ABBC5A00551B91 /* Extension */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		87697EE628ABBC5A00551B91 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		87697EE728ABBC8E00551B91 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */,
+				87697EC028A65C8500551B91 /* VideoViewController.swift */,
+				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
+				87697EC228A65CB500551B91 /* SearchViewController.swift */,
+				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
+				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
+				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87697EEA28ABEACF00551B91 /* first.apns in Resources */,
 				87697E9928A655CB00551B91 /* LaunchScreen.storyboard in Resources */,
 				87697E9628A655CB00551B91 /* Assets.xcassets in Resources */,
 			);
@@ -684,16 +714,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TMDB_LIST/TMDB_LIST.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Movies;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -713,16 +747,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TMDB_LIST/TMDB_LIST.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Movies;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
