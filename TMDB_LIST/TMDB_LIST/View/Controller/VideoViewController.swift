@@ -7,9 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 final class VideoViewController: UIViewController {
     fileprivate let sectionTitles = ["영화", "TV", "Popular", "Comming Soon", "지금 뜨는 컨텐츠"]
+    let subject = BehaviorSubject(value: "")
+    let disposeBag = DisposeBag()
     
     fileprivate enum Section: Int {
         case Movie = 0
@@ -38,6 +43,21 @@ final class VideoViewController: UIViewController {
         self.setupLayout()
         self.configureNavigationBar()
         
+        
+        Observable.of(.Movie, .TV, .Popular, .CommingSoon, .TopRates)
+            .bind(to: viewModel.input) // TODO
+            .disposed(by: self.disposeBag)
+        
+//        [[MovieViewModel],[MovieViewModel],[MovieViewModel],[MovieViewModel],[MovieViewModel]]
+        viewModel.output
+            .bind(to: self.tableView.rx.items) { tableView, index, data in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "CELL") else { return UITableViewCell() }
+                cell.textLabel?.text = data
+                return cell
+            }
+            .disposed(by: self.disposeBag)
+        
+
         self.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: Constants.headerViewHeight))
         self.tableView.tableHeaderView = self.videoHeaderView
     }

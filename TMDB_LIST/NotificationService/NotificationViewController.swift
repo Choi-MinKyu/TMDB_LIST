@@ -29,11 +29,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         let content = notification.request.content
-        guard let userInfo = content.userInfo as? [String: AnyObject] else { return }
-        guard let data = userInfo["data"] as? [String: AnyObject] else { return }
-        guard let bannerUrlString = data["bannerUrl"] as? String else { return }
-        guard let bannerUrl = URL(string: bannerUrlString) else { return }
-        guard Constans.pushKey == content.categoryIdentifier else { return }
+        guard let userInfo = content.userInfo as? [String: AnyObject]   else { return }
+        guard let data = userInfo["data"] as? [String: AnyObject]       else { return }
+        guard let bannerUrlString = data["bannerUrl"] as? String        else { return }
+        guard let bannerUrl = URL(string: bannerUrlString)              else { return }
+        guard Constans.pushKey == content.categoryIdentifier            else { return }
+        
+        print("cmk customNoti: \(bannerUrl)")
         
         self.label?.text = {
             "11 \($0) \($1) \($2)"
@@ -51,7 +53,9 @@ extension NotificationViewController {
     
     private func setupContentsHeight() {
         let height: CGFloat = {
-            $1 / $0.width * $0.height
+            let height = $1 / $0.width * $0.height
+            
+            return min(390, height)
         }(self.webView.scrollView.contentSize, self.view.bounds.width)
         
         self.webVIewHeightConstraints.constant = height

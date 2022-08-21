@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,7 +20,7 @@
 		87697EBF28A65C1C00551B91 /* TMDBTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */; };
 		87697EC128A65C8500551B91 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC028A65C8500551B91 /* VideoViewController.swift */; };
 		87697EC328A65CB500551B91 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC228A65CB500551B91 /* SearchViewController.swift */; };
-		87697EC528A65CE200551B91 /* CommingSonnViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */; };
+		87697EC528A65CE200551B91 /* CommingSonnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC428A65CE200551B91 /* CommingSonnViewController.swift */; };
 		87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC628A65D5E00551B91 /* DownloadViewController.swift */; };
 		87697ECA28A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697EC928A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift */; };
 		87697ECC28A663D500551B91 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697ECB28A663D500551B91 /* TitleCollectionViewCell.swift */; };
@@ -99,7 +99,7 @@
 		87697EBE28A65C1C00551B91 /* TMDBTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBTabBarViewController.swift; sourceTree = "<group>"; };
 		87697EC028A65C8500551B91 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		87697EC228A65CB500551B91 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommingSonnViewController copy.swift"; sourceTree = "<group>"; };
+		87697EC428A65CE200551B91 /* CommingSonnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommingSonnViewController.swift; sourceTree = "<group>"; };
 		87697EC628A65D5E00551B91 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		87697EC928A6624F00551B91 /* CollectionViewTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		87697ECB28A663D500551B91 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -331,7 +331,7 @@
 				87697EE228AB877B00551B91 /* VideoDetailViewController.swift */,
 				87697EC228A65CB500551B91 /* SearchViewController.swift */,
 				87697EDA28AB52F300551B91 /* SearchedMovieViewController.swift */,
-				87697EC428A65CE200551B91 /* CommingSonnViewController copy.swift */,
+				87697EC428A65CE200551B91 /* CommingSonnViewController.swift */,
 				87697EC628A65D5E00551B91 /* DownloadViewController.swift */,
 			);
 			path = Controller;
@@ -618,7 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87697EDD28AB6B5600551B91 /* MovieTableViewCell.swift in Sources */,
-				87697EC528A65CE200551B91 /* CommingSonnViewController copy.swift in Sources */,
+				87697EC528A65CE200551B91 /* CommingSonnViewController.swift in Sources */,
 				87697ECE28A6E07D00551B91 /* VideoHeaderView.swift in Sources */,
 				87697EE328AB877B00551B91 /* VideoDetailViewController.swift in Sources */,
 				87697EC328A65CB500551B91 /* SearchViewController.swift in Sources */,

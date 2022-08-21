@@ -8,6 +8,7 @@ target 'TMDB_LIST' do
   pod 'RxCocoa'
   pod 'Kingfisher'
   pod 'SnapKit'
+  pod 'RxDataSources'
 
   # Pods for TMDB_LIST
 
