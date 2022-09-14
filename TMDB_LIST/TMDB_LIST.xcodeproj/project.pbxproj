@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,6 +41,10 @@
 		87697EF928AC8E0100551B91 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87697EF728AC8E0100551B91 /* MainInterface.storyboard */; };
 		87697EFD28AC8E0100551B91 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 87697EEF28AC8E0100551B91 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		87697F0328AD0BB300551B91 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87697F0228AD0BB300551B91 /* Array+.swift */; };
+		876EDF4828D112E2004EE2F3 /* ViewModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EDF4728D112E2004EE2F3 /* ViewModelBase.swift */; };
+		876EDF4A28D114D6004EE2F3 /* ViewModelBindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EDF4928D114D6004EE2F3 /* ViewModelBindableType.swift */; };
+		876EDF4E28D11524004EE2F3 /* LifeCycle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EDF4D28D11524004EE2F3 /* LifeCycle+.swift */; };
+		876EDF5028D11554004EE2F3 /* Observable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EDF4F28D11554004EE2F3 /* Observable+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +126,10 @@
 		87697EF828AC8E0100551B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		87697EFA28AC8E0100551B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87697F0228AD0BB300551B91 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		876EDF4728D112E2004EE2F3 /* ViewModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBase.swift; sourceTree = "<group>"; };
+		876EDF4928D114D6004EE2F3 /* ViewModelBindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindableType.swift; sourceTree = "<group>"; };
+		876EDF4D28D11524004EE2F3 /* LifeCycle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LifeCycle+.swift"; sourceTree = "<group>"; };
+		876EDF4F28D11554004EE2F3 /* Observable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+.swift"; sourceTree = "<group>"; };
 		8FAF035B50E710197C27B134 /* Pods-TMDB_LISTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LISTTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB_LISTTests/Pods-TMDB_LISTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A615A221747D843ABE8E6F1E /* Pods-TMDB_LIST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB_LIST.release.xcconfig"; path = "Target Support Files/Pods-TMDB_LIST/Pods-TMDB_LIST.release.xcconfig"; sourceTree = "<group>"; };
 		B7CDAB258460744CCBCCCC8D /* Pods_TMDB_LIST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_LIST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +203,7 @@
 		87697E8028A655CA00551B91 = {
 			isa = PBXGroup;
 			children = (
+				876EDF4628D112D4004EE2F3 /* Core */,
 				87697EBC28A65A8C00551B91 /* Resources */,
 				87697E8B28A655CA00551B91 /* TMDB_LIST */,
 				87697EA228A655CB00551B91 /* TMDB_LISTTests */,
@@ -345,6 +354,33 @@
 				87697EFA28AC8E0100551B91 /* Info.plist */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		876EDF4628D112D4004EE2F3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				876EDF4C28D114FA004EE2F3 /* LifeCycle */,
+				876EDF4B28D114ED004EE2F3 /* ViewModel */,
+				876EDF4F28D11554004EE2F3 /* Observable+.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		876EDF4B28D114ED004EE2F3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				876EDF4728D112E2004EE2F3 /* ViewModelBase.swift */,
+				876EDF4928D114D6004EE2F3 /* ViewModelBindableType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		876EDF4C28D114FA004EE2F3 /* LifeCycle */ = {
+			isa = PBXGroup;
+			children = (
+				876EDF4D28D11524004EE2F3 /* LifeCycle+.swift */,
+			);
+			path = LifeCycle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,9 +667,13 @@
 				87697ED928AB3F7700551B91 /* SearchTableViewCell.swift in Sources */,
 				87697E8F28A655CA00551B91 /* SceneDelegate.swift in Sources */,
 				87697EDF28AB810600551B91 /* YoutubeModel.swift in Sources */,
+				876EDF4828D112E2004EE2F3 /* ViewModelBase.swift in Sources */,
 				87697EC128A65C8500551B91 /* VideoViewController.swift in Sources */,
 				87697ECC28A663D500551B91 /* TitleCollectionViewCell.swift in Sources */,
+				876EDF4A28D114D6004EE2F3 /* ViewModelBindableType.swift in Sources */,
 				87697EC728A65D5E00551B91 /* DownloadViewController.swift in Sources */,
+				876EDF4E28D11524004EE2F3 /* LifeCycle+.swift in Sources */,
+				876EDF5028D11554004EE2F3 /* Observable+.swift in Sources */,
 				87697EDB28AB52F300551B91 /* SearchedMovieViewController.swift in Sources */,
 				87697EE128AB817600551B91 /* YoutubeViewModel.swift in Sources */,
 				87697EBF28A65C1C00551B91 /* TMDBTabBarViewController.swift in Sources */,
@@ -971,6 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
@@ -986,6 +1027,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dsjang.TMDB-LIST.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -997,6 +1039,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QSLADL5YX5;
@@ -1012,6 +1055,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dsjang.TMDB-LIST.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
