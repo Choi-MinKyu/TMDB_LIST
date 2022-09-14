@@ -13,7 +13,7 @@ import RxDataSources
 
 final class VideoViewController: UIViewController {
     fileprivate let sectionTitles = ["영화", "TV", "Popular", "Comming Soon", "지금 뜨는 컨텐츠"]
-    let subject = BehaviorSubject(value: "")
+    let headerViewSubject = PublishSubject<[MovieModel]>()
     let disposeBag = DisposeBag()
     
     fileprivate enum Section: Int {
@@ -37,41 +37,62 @@ final class VideoViewController: UIViewController {
     
     private var videoHeaderView: VideoHeaderView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        self.setupLayout()
-        self.configureNavigationBar()
-        
-        
-        Observable.of(.Movie, .TV, .Popular, .CommingSoon, .TopRates)
-            .bind(to: viewModel.input) // TODO
+        self.rx.viewDidLoad
+            .bind(onNext: self.setupLayout)
             .disposed(by: self.disposeBag)
         
-//        [[MovieViewModel],[MovieViewModel],[MovieViewModel],[MovieViewModel],[MovieViewModel]]
-        viewModel.output
-            .bind(to: self.tableView.rx.items) { tableView, index, data in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "CELL") else { return UITableViewCell() }
-                cell.textLabel?.text = data
-                return cell
-            }
+        self.rx.viewDidLoad.bind(onNext: self.configureNavigationBar)
             .disposed(by: self.disposeBag)
         
+        self.headerViewSubject
+            .compactMap { $0.randomElement() }
+            .map { MovieViewModel(movieModel: $0) }
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { owner, viewModel in
+                owner.videoHeaderView?.configure(with: viewModel)
+            })
+            .disposed(by: self.disposeBag)
 
-        self.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: Constants.headerViewHeight))
-        self.tableView.tableHeaderView = self.videoHeaderView
+        self.rx.viewWillAppear.bind(onNext: self.configureHeaderView)
+            .disposed(by: self.disposeBag)
+        
+        self.rx.viewDidLoad
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.videoHeaderView = VideoHeaderView(frame: CGRect(x: 0, y: 0, width: owner.view.bounds.width, height: Constants.headerViewHeight))
+                owner.tableView.tableHeaderView = self.videoHeaderView
+            })
+            .disposed(by: self.disposeBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.configureHeaderView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         self.tableView.frame = self.view.bounds
+    }
+}
+
+extension VideoViewController: ViewModelBindableType {
+    func bindInput(viewModel: MovieViewModel) {
+        self.rx.viewDidLoad
+            .map{ _ in .load }
+            .bind(to: viewModel.input)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindOutput(viewModel: MovieViewModel) {
+        viewModel.output
+            .models
+            .drive(onNext: {
+                print($0)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -98,10 +119,7 @@ extension VideoViewController {
         playButton.setImage(UIImage(systemName: "play.rectangle"), for: .normal)
         let play = UIBarButtonItem(customView: playButton)
         
-        self.navigationItem.rightBarButtonItems = [
-            person,
-            play,
-        ]
+        self.navigationItem.rightBarButtonItems = [person, play]
         
         self.navigationController?.navigationBar.tintColor = .white
     }
@@ -110,11 +128,7 @@ extension VideoViewController {
         SimpleAPI.shared.movies { [weak self] result in
             switch result {
             case .success(let movies):
-                let movieViewModel = MovieViewModel(movieModel: movies.randomElement())
-                
-                DispatchQueue.main.async {
-                    self?.videoHeaderView?.configure(with: movieViewModel)
-                }
+                self?.headerViewSubject.onNext(movies)
             case .failure(let error):
                 print(error.localizedDescription)
             }
