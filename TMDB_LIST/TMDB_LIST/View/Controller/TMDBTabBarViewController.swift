@@ -9,28 +9,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol Tea {
-    associatedtype Identifier
-    var id: Identifier { get }
-}
 
-struct GreenTea: Tea {
-    let id: String
-    init(id: String) {
-        self.id = id
-    }
-}
-
-func favoriteTea() -> some Tea {
-    return GreenTea(id: "someId")
-}
-
-
-protocol TEST {
+protocol ViewProtocol {
     func toView() -> UIViewController
 }
 
-extension UIViewController: TEST {
+extension UIViewController: ViewProtocol {
     func toView() -> UIViewController {
         self
     }
@@ -44,16 +28,16 @@ final class TMDBTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         let videoViewControllerObservable = Observable.just(VideoViewController())
-            .map {  v -> TEST in
+            .map {  v -> ViewProtocol in
                 v.tabBarItem.image = UIImage(systemName: "video")
                 v.title = "비디오"
-                
+                v.viewModel = MovieViewModel(movieModel: nil)
                 return v
             }
 
         
         let commingSoonViewControllerObservable = Observable.just(CommingSoonViewController())
-            .map { v -> TEST in
+            .map { v -> ViewProtocol in
                 v.tabBarItem.image = UIImage(systemName: "play.circle")
                 v.title = "Coming Soon"
                 
@@ -62,7 +46,7 @@ final class TMDBTabBarViewController: UITabBarController {
 
         
         let searchViewControllerObservable = Observable.just(SearchViewController())
-            .map { v -> TEST in
+            .map { v -> ViewProtocol in
                 v.tabBarItem.image = UIImage(systemName: "magnifyingglass")
                 v.title = "검색"
                 
@@ -71,7 +55,7 @@ final class TMDBTabBarViewController: UITabBarController {
 
         
         let downloadViewControllerObservable = Observable.just(DownloadViewController())
-            .map { v -> TEST in
+            .map { v -> ViewProtocol in
                 v.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
                 v.title = "다운로드"
                 
@@ -81,7 +65,7 @@ final class TMDBTabBarViewController: UITabBarController {
         
         self.tabBar.tintColor = .label
 
-        Observable<TEST>.concat([videoViewControllerObservable, commingSoonViewControllerObservable, searchViewControllerObservable, downloadViewControllerObservable])
+        Observable<ViewProtocol>.concat([videoViewControllerObservable, commingSoonViewControllerObservable, searchViewControllerObservable, downloadViewControllerObservable])
             .map { $0.toView() }
             .toArray()
             .asObservable()
