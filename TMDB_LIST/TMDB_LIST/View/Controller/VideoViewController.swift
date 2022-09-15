@@ -11,11 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class VideoViewController: UIViewController {
-    fileprivate let sectionTitles = ["영화", "TV", "Popular", "Comming Soon", "지금 뜨는 컨텐츠"]
-    let headerViewSubject = PublishSubject<[MovieModel]>()
-    let disposeBag = DisposeBag()
-    
+extension VideoViewController {
     fileprivate enum Section: Int {
         case Movie = 0
         case TV
@@ -29,7 +25,13 @@ final class VideoViewController: UIViewController {
         static let headerCellHeight: CGFloat = 40
         static let headerViewHeight: CGFloat = 500
     }
+}
 
+final class VideoViewController: UIViewController {
+    private let sectionTitles = ["영화", "TV", "Popular", "Comming Soon", "지금 뜨는 컨텐츠"]
+    let headerViewSubject = PublishSubject<[MovieModel]>()
+    let disposeBag = DisposeBag()
+    
     private let tableView: UITableView = {
         $0.register(CollectionViewTableViewCEll.self, forCellReuseIdentifier: CollectionViewTableViewCEll.identifier)
         return $0
