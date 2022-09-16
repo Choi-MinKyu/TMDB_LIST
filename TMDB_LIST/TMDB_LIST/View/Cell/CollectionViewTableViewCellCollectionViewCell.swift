@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CollectionViewTableViewCEllDelegate: AnyObject {
     func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel)
@@ -13,6 +14,8 @@ protocol CollectionViewTableViewCEllDelegate: AnyObject {
 
 final class CollectionViewTableViewCEll: UITableViewCell {
     static let identifier = "CollectionViewTableViewCellCollectionViewCell"
+    
+    let disposeBag: DisposeBag = .init()
     
     private var viewModels = [MovieViewModel]()
     
@@ -53,6 +56,16 @@ final class CollectionViewTableViewCEll: UITableViewCell {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
+    }
+}
+
+extension CollectionViewTableViewCEll: ViewModelBindableType {
+    func bindInput(viewModel: MovieViewModel) {
+        
+    }
+    
+    func bindOutput(viewModel: MovieViewModel) {
+        
     }
 }
 

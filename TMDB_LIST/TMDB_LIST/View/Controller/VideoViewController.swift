@@ -50,13 +50,13 @@ final class VideoViewController: UIViewController {
             .disposed(by: self.disposeBag)
         
         Observable.zip(self.headerViewSubject, self.rx.viewWillAppear) { value, _ in value }
-        .compactMap { $0.randomElement() }
-        .map { MovieViewModel(movieModel: $0) }
-        .observe(on: MainScheduler.instance)
-        .subscribe(with: self, onNext: { owner, viewModel in
-            owner.videoHeaderView?.configure(with: viewModel)
-        })
-        .disposed(by: self.disposeBag)
+            .compactMap { $0.randomElement() }
+            .map { MovieViewModel(movieModel: $0) }
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { owner, viewModel in
+                owner.videoHeaderView?.configure(with: viewModel)
+            })
+            .disposed(by: self.disposeBag)
         
         self.rx.viewWillAppear.bind(onNext: self.configureHeaderView)
             .disposed(by: self.disposeBag)
@@ -80,6 +80,8 @@ final class VideoViewController: UIViewController {
     }
 }
 
+// MARK: - Bind Input, Output
+
 extension VideoViewController: ViewModelBindableType {
     func bindInput(viewModel: MovieViewModel) {
         self.rx.viewDidLoad
@@ -97,6 +99,8 @@ extension VideoViewController: ViewModelBindableType {
             .disposed(by: self.disposeBag)
     }
 }
+
+// MARK: - Private methods
 
 extension VideoViewController {
     private func setupLayout() {
@@ -137,6 +141,8 @@ extension VideoViewController {
         }
     }
 }
+
+//MARK: - Delegates for UITableViewDelegate, UITableViewDataSource
 
 extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -249,6 +255,8 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
 }
+
+// MARK: - Custom Delegates
 
 extension VideoViewController: CollectionViewTableViewCEllDelegate {
     func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
