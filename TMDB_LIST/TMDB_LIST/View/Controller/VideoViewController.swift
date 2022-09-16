@@ -50,13 +50,13 @@ final class VideoViewController: UIViewController {
             .disposed(by: self.disposeBag)
         
         Observable.zip(self.headerViewSubject, self.rx.viewWillAppear) { value, _ in value }
-        .compactMap { $0.randomElement() }
-        .map { MovieViewModel(movieModel: $0) }
-        .observe(on: MainScheduler.instance)
-        .subscribe(with: self, onNext: { owner, viewModel in
-            owner.videoHeaderView?.configure(with: viewModel)
-        })
-        .disposed(by: self.disposeBag)
+            .compactMap { $0.randomElement() }
+            .map { MovieViewModel(movieModel: $0) }
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { owner, viewModel in
+                owner.videoHeaderView?.configure(with: viewModel)
+            })
+            .disposed(by: self.disposeBag)
         
         self.rx.viewWillAppear.bind(onNext: self.configureHeaderView)
             .disposed(by: self.disposeBag)
