@@ -48,10 +48,10 @@ struct VideoViewDataSource {
     typealias DataSource = RxTableViewSectionedReloadDataSource
     
     static func dataSource() -> DataSource<VideoSectionModel> {
-        .init { dataSource, tableView, indexPath, item -> UITableViewCell in
-            switch dataSource[indexPath] {
+        .init { dataSource, tableView, index, item -> UITableViewCell in
+            switch dataSource[index] {
             case .ImageSectionItem(let viewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCEll.identifier, for: indexPath) as! CollectionViewTableViewCEll
+                let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCEll.identifier, for: index) as! CollectionViewTableViewCEll
                 cell.viewModel = viewModel
                 return cell
             }
