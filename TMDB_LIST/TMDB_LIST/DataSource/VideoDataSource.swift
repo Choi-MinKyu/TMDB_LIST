@@ -13,7 +13,7 @@ enum VideoSectionModel {
 }
 
 enum VideoSectionItem {
-    case ImageSectionItem(MovieViewModel)
+    case ImageSectionItem(CollectionTableViewCEllViewModel)
 }
 
 extension VideoSectionModel: SectionModelType {
@@ -52,8 +52,12 @@ struct VideoViewDataSource {
             switch dataSource[indexPath] {
             case .ImageSectionItem(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCEll.identifier, for: indexPath) as! CollectionViewTableViewCEll
+                cell.viewModel = viewModel
                 return cell
             }
+        } titleForHeaderInSection: { datasource, index in
+            let section = datasource[index]
+            return section.title
         }
     }
 }

@@ -22,11 +22,19 @@ final class MovieViewModel: ViewModelBase {
     struct OutputActionType {
         let models: PublishRelay<[MovieModel]> = PublishRelay()
         let networkError: PublishRelay<String> = PublishRelay()
+        var sections: BehaviorRelay<[VideoSectionModel]> = .init(value: [
+            .thumbnail(title: "section1", items: []),
+            .thumbnail(title: "section2", items: []),
+            .thumbnail(title: "section3", items: []),
+            .thumbnail(title: "section4", items: []),
+            .thumbnail(title: "section5", items: []),
+        ])
     }
     
     struct Output {
         let models: Driver<[MovieModel]>
         let networkError: Driver<String>
+        let sections: Driver<[VideoSectionModel]>
     }
     
     let typeValueForOutput = OutputActionType()
@@ -81,13 +89,23 @@ extension MovieViewModel {
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
         case .movies(let movies):
-            self.typeValueForOutput.models.accept(movies)
+            let items = movies
+                .map { CollectionTableViewCEllViewModel(model: $0) }
+                .map { VideoSectionItem.ImageSectionItem($0) }
+            
+            var sections = self.typeValueForOutput.sections.value
+            let item = VideoSectionModel(original: sections[0], items: items)
+            sections[0] = item
+            
+            self.typeValueForOutput.sections.accept(sections)
         case .error(let errorString):
             self.typeValueForOutput.networkError.accept(errorString)
         }
     }
     
     func generateOutput(from outputActionType: OutputActionType) -> Output {
-        Output(models: outputActionType.models.asDriver(onErrorJustReturn: []), networkError: outputActionType.networkError.asDriver(onErrorJustReturn: ""))
+        Output(models: outputActionType.models.asDriver(onErrorJustReturn: []),
+               networkError: outputActionType.networkError.asDriver(onErrorJustReturn: ""),
+               sections: outputActionType.sections.asDriver(onErrorJustReturn: []))
     }
 }

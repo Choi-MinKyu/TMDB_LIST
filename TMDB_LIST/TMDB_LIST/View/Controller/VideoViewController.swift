@@ -91,11 +91,10 @@ extension VideoViewController: ViewModelBindableType {
     }
     
     func bindOutput(viewModel: MovieViewModel) {
+        let dataSource = VideoViewDataSource.dataSource()
         viewModel.output
-            .models
-            .drive(onNext: {
-                print($0)
-            })
+            .sections
+            .drive(self.tableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
     }
 }
@@ -108,9 +107,13 @@ extension VideoViewController {
         
         _ = {
             self.view.addSubview($0)
-            $0.delegate = self
-            $0.dataSource = self
+//            $0.delegate = self
+//            $0.dataSource = self
         }(self.tableView)
+        
+        Observable.just(Constants.cellHeight)
+            .bind(to: self.tableView.rx.rowHeight)
+            .disposed(by: self.disposeBag)
     }
     
     private func configureNavigationBar() {
