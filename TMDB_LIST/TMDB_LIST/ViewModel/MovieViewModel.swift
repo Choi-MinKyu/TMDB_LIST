@@ -22,11 +22,19 @@ final class MovieViewModel: ViewModelBase {
     struct OutputActionType {
         let models: PublishRelay<[MovieModel]> = PublishRelay()
         let networkError: PublishRelay<String> = PublishRelay()
+        let sections: BehaviorRelay<[VideoSectionModel]> = .init(value: [
+            .thumbnail(title: "section1", items: []),
+            .thumbnail(title: "section2", items: []),
+            .thumbnail(title: "section3", items: []),
+            .thumbnail(title: "section4", items: []),
+            .thumbnail(title: "section5", items: []),
+        ])
     }
     
     struct Output {
         let models: Driver<[MovieModel]>
         let networkError: Driver<String>
+        let sections: Driver<[VideoSectionModel]>
     }
     
     let typeValueForOutput = OutputActionType()
@@ -88,6 +96,8 @@ extension MovieViewModel {
     }
     
     func generateOutput(from outputActionType: OutputActionType) -> Output {
-        Output(models: outputActionType.models.asDriver(onErrorJustReturn: []), networkError: outputActionType.networkError.asDriver(onErrorJustReturn: ""))
+        Output(models: outputActionType.models.asDriver(onErrorJustReturn: []),
+               networkError: outputActionType.networkError.asDriver(onErrorJustReturn: ""),
+               sections: outputActionType.sections.asDriver(onErrorJustReturn: []))
     }
 }
