@@ -89,15 +89,16 @@ extension MovieViewModel {
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
         case .movies(let movies):
-            let items = movies
-                .map { CollectionTableViewCEllViewModel(model: $0) }
-                .map { VideoSectionItem.ImageSectionItem($0) }
-            
-            var sections = self.typeValueForOutput.sections.value
-            let item = VideoSectionModel(original: sections[0], items: items)
-            sections[0] = item
-            
-            self.typeValueForOutput.sections.accept(sections)
+            break
+//            let items = movies
+//                .map { CollectionTableViewCEllViewModel(model: $0) }
+//                .map { VideoSectionItem.ImageSectionItem($0) }
+//
+//            var sections = self.typeValueForOutput.sections.value
+//            let item = VideoSectionModel(original: sections[0], items: items)
+//            sections[0] = item
+//
+//            self.typeValueForOutput.sections.accept(sections)
         case .error(let errorString):
             self.typeValueForOutput.networkError.accept(errorString)
         }
