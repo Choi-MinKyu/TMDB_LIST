@@ -22,7 +22,7 @@ final class MovieViewModel: ViewModelBase {
     struct OutputActionType {
         let models: PublishRelay<[MovieModel]> = PublishRelay()
         let networkError: PublishRelay<String> = PublishRelay()
-        let sections: BehaviorRelay<[VideoSectionModel]> = .init(value: [
+        var sections: BehaviorRelay<[VideoSectionModel]> = .init(value: [
             .thumbnail(title: "section1", items: []),
             .thumbnail(title: "section2", items: []),
             .thumbnail(title: "section3", items: []),
@@ -89,7 +89,15 @@ extension MovieViewModel {
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
         case .movies(let movies):
-            self.typeValueForOutput.models.accept(movies)
+            let items = movies
+                .map { CollectionTableViewCEllViewModel(model: $0) }
+                .map { VideoSectionItem.ImageSectionItem($0) }
+            
+            var sections = self.typeValueForOutput.sections.value
+            let item = VideoSectionModel(original: sections[0], items: items)
+            sections[0] = item
+            
+            self.typeValueForOutput.sections.accept(sections)
         case .error(let errorString):
             self.typeValueForOutput.networkError.accept(errorString)
         }

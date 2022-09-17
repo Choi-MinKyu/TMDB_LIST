@@ -55,6 +55,9 @@ struct VideoViewDataSource {
                 cell.viewModel = viewModel
                 return cell
             }
+        } titleForHeaderInSection: { datasource, index in
+            let section = datasource[index]
+            return section.title
         }
     }
 }

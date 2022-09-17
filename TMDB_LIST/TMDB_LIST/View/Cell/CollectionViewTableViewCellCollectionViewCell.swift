@@ -15,7 +15,7 @@ protocol CollectionViewTableViewCEllDelegate: AnyObject {
 final class CollectionViewTableViewCEll: UITableViewCell {
     static let identifier = "CollectionViewTableViewCellCollectionViewCell"
     
-    let disposeBag: DisposeBag = .init()
+    var disposeBag: DisposeBag = .init()
     
     private var viewModels = [MovieViewModel]()
     
@@ -43,7 +43,12 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.disposeBag = DisposeBag()
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -61,11 +66,18 @@ final class CollectionViewTableViewCEll: UITableViewCell {
 
 extension CollectionViewTableViewCEll: ViewModelBindableType {
     func bindInput(viewModel: CollectionTableViewCEllViewModel) {
-        
+        Observable.just(.load)
+            .bind(to: viewModel.input)
+            .disposed(by: self.disposeBag)
     }
     
     func bindOutput(viewModel: CollectionTableViewCEllViewModel) {
-        
+        viewModel.output
+            .title
+            .drive(onNext: {
+                print("cmk cell bindoutput \($0)")
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 

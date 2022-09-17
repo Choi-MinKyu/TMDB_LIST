@@ -10,11 +10,11 @@ import RxCocoa
 
 final class CollectionTableViewCEllViewModel: ViewModelBase {
     enum InputActionType {
-        case noAction
+        case load
     }
     
     enum MutateActionType {
-        case noMutate
+        case load(String)
     }
     
     struct OutputActionType {
@@ -29,9 +29,9 @@ final class CollectionTableViewCEllViewModel: ViewModelBase {
     
     let typeValueForOutput: OutputActionType = .init()
     
-    private let model: MovieModel?
+    private let model: [MovieModel]?
     
-    init(model: MovieModel?) {
+    init(model: [MovieModel]?) {
         self.model = model
     }
 }
@@ -44,13 +44,19 @@ extension CollectionTableViewCEllViewModel {
 
 extension CollectionTableViewCEllViewModel {
     func action(inputAction: InputActionType) -> Observable<MutateActionType> {
-        return .empty()
+        switch inputAction {
+        case .load:
+            
+            
+            
+            return .just(.load("cmk title"))
+        }
     }
     
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
-        case .noMutate:
-            self.typeValueForOutput.title.accept("test action")
+        case .load(let title):
+            self.typeValueForOutput.title.accept(title)
         }
     }
 }
