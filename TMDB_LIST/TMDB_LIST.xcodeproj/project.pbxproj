@@ -303,8 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				87697ED528A6EEE100551B91 /* MovieViewModel.swift */,
-				87697EE028AB817600551B91 /* YoutubeViewModel.swift */,
 				876EDF5428D4F8DE004EE2F3 /* CollectionTableViewCEllViewModel.swift */,
+				87697EE028AB817600551B91 /* YoutubeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

@@ -60,11 +60,11 @@ final class CollectionViewTableViewCEll: UITableViewCell {
 }
 
 extension CollectionViewTableViewCEll: ViewModelBindableType {
-    func bindInput(viewModel: MovieViewModel) {
+    func bindInput(viewModel: CollectionTableViewCEllViewModel) {
         
     }
     
-    func bindOutput(viewModel: MovieViewModel) {
+    func bindOutput(viewModel: CollectionTableViewCEllViewModel) {
         
     }
 }
