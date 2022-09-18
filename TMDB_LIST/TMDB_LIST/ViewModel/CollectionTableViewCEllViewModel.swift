@@ -14,17 +14,15 @@ final class CollectionTableViewCEllViewModel: ViewModelBase {
     }
     
     enum MutateActionType {
-        case load(String)
+        case models([MovieModel])
     }
     
     struct OutputActionType {
-        let title: PublishRelay<String> = .init()
-        let subTitle: PublishRelay<String> = .init()
+        let models: PublishRelay<[MovieModel]> = .init()
     }
     
     struct Output {
-        let title: Driver<String>
-        let subTitle: Driver<String>
+        let models: Driver<[MovieModel]>
     }
     
     let typeValueForOutput: OutputActionType = .init()
@@ -38,7 +36,7 @@ final class CollectionTableViewCEllViewModel: ViewModelBase {
 
 extension CollectionTableViewCEllViewModel {
     func generateOutput(from outputActionType: OutputActionType) -> Output {
-        .init(title: outputActionType.title.asDriver(onErrorJustReturn: ""), subTitle: outputActionType.subTitle.asDriver(onErrorJustReturn: ""))
+        .init(models: outputActionType.models.asDriver(onErrorJustReturn: []))
     }
 }
 
@@ -46,17 +44,16 @@ extension CollectionTableViewCEllViewModel {
     func action(inputAction: InputActionType) -> Observable<MutateActionType> {
         switch inputAction {
         case .load:
+            guard let models = self.model else { return .empty() }
             
-            
-            
-            return .just(.load("cmk title"))
+            return .just(.models(models))
         }
     }
     
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
-        case .load(let title):
-            self.typeValueForOutput.title.accept(title)
+        case .models(let models):
+            self.typeValueForOutput.models.accept(models)
         }
     }
 }
