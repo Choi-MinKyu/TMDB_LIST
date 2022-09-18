@@ -15,7 +15,7 @@ final class MovieViewModel: ViewModelBase {
     }
     
     enum MutateActionType {
-        case movies([MovieModel])
+        case movies(VideoSectionItem)
         case error(String)
     }
     
@@ -73,7 +73,10 @@ extension MovieViewModel {
                 SimpleAPI.shared.movies {
                     switch $0 {
                     case .success(let movies):
-                        observer.onNext(.movies(movies))
+                        let cellViewModel = CollectionTableViewCEllViewModel(model: movies)
+                        let sectionItem = VideoSectionItem.ImageSectionItem(cellViewModel)
+                        observer.onNext(.movies(sectionItem))
+                        
                     case .failure(let error):
                         observer.onNext(.error(error.localizedDescription))
                     }
@@ -88,17 +91,12 @@ extension MovieViewModel {
     
     func update(mutateAction: MutateActionType) {
         switch mutateAction {
-        case .movies(let movies):
-            break
-//            let items = movies
-//                .map { CollectionTableViewCEllViewModel(model: $0) }
-//                .map { VideoSectionItem.ImageSectionItem($0) }
-//
-//            var sections = self.typeValueForOutput.sections.value
-//            let item = VideoSectionModel(original: sections[0], items: items)
-//            sections[0] = item
-//
-//            self.typeValueForOutput.sections.accept(sections)
+        case .movies(let sectionItem):
+            var sections = self.typeValueForOutput.sections.value
+            let item = VideoSectionModel(original: sections[0], items: [sectionItem])
+            sections[0] = item
+
+            self.typeValueForOutput.sections.accept(sections)
         case .error(let errorString):
             self.typeValueForOutput.networkError.accept(errorString)
         }

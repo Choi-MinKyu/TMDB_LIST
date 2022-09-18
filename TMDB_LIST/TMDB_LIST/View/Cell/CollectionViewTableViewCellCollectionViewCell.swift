@@ -73,7 +73,7 @@ extension CollectionViewTableViewCEll: ViewModelBindableType {
     
     func bindOutput(viewModel: CollectionTableViewCEllViewModel) {
         viewModel.output
-            .title
+            .models
             .drive(onNext: {
                 print("cmk cell bindoutput \($0)")
             })
