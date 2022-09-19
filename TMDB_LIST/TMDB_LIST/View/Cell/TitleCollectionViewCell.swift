@@ -7,9 +7,13 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 final class TitleCollectionViewCell: UICollectionViewCell {
     static let identifier = "TitleCollectionViewCell"
+    
+    var disposeBag = DisposeBag()
     
     private let thumbnailImageView: UIImageView = {
         $0.contentMode = .scaleAspectFill
@@ -19,6 +23,7 @@ final class TitleCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.contentView.backgroundColor = .white
         self.contentView.addSubview(thumbnailImageView)
     }
     
@@ -31,12 +36,32 @@ final class TitleCollectionViewCell: UICollectionViewCell {
         
         self.thumbnailImageView.frame = self.contentView.bounds
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        disposeBag = DisposeBag()
+    }
 }
 
-extension TitleCollectionViewCell {
-    func configure(with viewModel: MovieViewModel?) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(viewModel?.thumbnailImageUrl ?? "")") else { return }
-        
-        self.thumbnailImageView.kf.setImage(with: url)
+extension TitleCollectionViewCell: ViewModelBindableType {
+    func bindInput(viewModel: TitleCollectionCellViewModel) {
+        Observable.just(.load)
+            .bind(to: viewModel.input)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindOutput(viewModel: TitleCollectionCellViewModel) {
+        let baseUrlObservable = Driver.just("https://image.tmdb.org/t/p/w500/")
+
+        viewModel.output.data
+            .withLatestFrom(baseUrlObservable) { posterPath, baseUrlString in
+                URL(string: "\(baseUrlString)\(posterPath)")
+            }
+            .compactMap { $0 }
+            .drive(with: self, onNext: {
+                $0.thumbnailImageView.kf.setImage(with: $1)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

@@ -107,3 +107,28 @@ extension ViewModelBindableType where Self: UITableViewCell {
     }
 }
 
+extension ViewModelBindableType where Self: UICollectionViewCell {
+    public var viewModel: ViewModel? {
+        get {
+            if let value = objc_getAssociatedObject(self, &ViewModelKeyType.viewModel) as? ViewModel {
+                return value
+            }
+            
+            return nil
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &ViewModelKeyType.viewModel, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            
+            layoutIfNeeded()
+            self.bind(viewModel: newValue)
+        }
+    }
+    
+    func bind(viewModel: ViewModel?) {
+        if let viewModel = viewModel {
+            bindOutput(viewModel: viewModel)
+            bindInput(viewModel: viewModel)
+        }
+    }
+}

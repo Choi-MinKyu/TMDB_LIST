@@ -10,11 +10,11 @@ import RxCocoa
 
 class TitleCollectionCellViewModel: ViewModelBase {
     enum InputActionType {
-        case no
+        case load
     }
     
     enum MutateActionType {
-        case no
+        case updateThumnail(String)
     }
     
     struct OutputActionType {
@@ -32,6 +32,10 @@ class TitleCollectionCellViewModel: ViewModelBase {
     init(model: MovieModel?) {
         self.model = model
     }
+    
+    func titlePath() -> String {
+        self.model?.poster_path ?? ""
+    }
 }
 
 extension TitleCollectionCellViewModel {
@@ -42,10 +46,16 @@ extension TitleCollectionCellViewModel {
 
 extension TitleCollectionCellViewModel {
     func action(inputAction: InputActionType) -> Observable<MutateActionType> {
-        .empty()
+        switch inputAction {
+        case .load:
+            return .just(.updateThumnail(self.titlePath()))
+        }
     }
     
     func update(mutateAction: MutateActionType) {
-        
+        switch mutateAction {
+        case .updateThumnail(let urlString):
+            self.typeValueForOutput.data.accept(urlString)
+        }
     }
 }
