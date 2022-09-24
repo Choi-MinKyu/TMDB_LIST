@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxDataSources
 
 protocol CollectionViewTableViewCEllDelegate: AnyObject {
     func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel)
@@ -14,7 +16,9 @@ protocol CollectionViewTableViewCEllDelegate: AnyObject {
 final class CollectionViewTableViewCEll: UITableViewCell {
     static let identifier = "CollectionViewTableViewCellCollectionViewCell"
     
-    private var viewModels = [MovieViewModel]()
+    var disposeBag: DisposeBag = .init()
+    
+    private var movieModels = [MovieModel]()
     
     weak var delegate: CollectionViewTableViewCEllDelegate?
     
@@ -33,12 +37,16 @@ final class CollectionViewTableViewCEll: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentView.addSubview(self.collectionView)
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.disposeBag = DisposeBag()
     }
     
     override func layoutSubviews() {
@@ -47,8 +55,8 @@ final class CollectionViewTableViewCEll: UITableViewCell {
         self.collectionView.frame = self.contentView.bounds
     }
     
-    func configure(with viewModels: [MovieViewModel]) {
-        self.viewModels = viewModels
+    func configure(with movieModels: [MovieModel]) {
+        self.movieModels = movieModels
         
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
@@ -56,9 +64,28 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     }
 }
 
+extension CollectionViewTableViewCEll: ViewModelBindableType {
+    func bindInput(viewModel: CollectionTableViewCEllViewModel) {
+        Observable.just(.load)
+            .bind(to: viewModel.input)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindOutput(viewModel: CollectionTableViewCEllViewModel) {
+        let datasource = TitleCellDataSource.dataSource()
+        
+        viewModel.output
+            .models
+            .map { Section(header: "", items: $0) }
+            .map { [$0] }
+            .drive(self.collectionView.rx.items(dataSource: datasource))
+            .disposed(by: self.disposeBag)
+    }
+}
+
 extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModels.count
+        return self.movieModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,30 +93,31 @@ extension CollectionViewTableViewCEll: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
-        cell.configure(with: self.viewModels[safe: indexPath.row])
-
+        let movieModel = self.movieModels[indexPath.item]
+        cell.viewModel = TitleCollectionCellViewModel(model: movieModel)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let movieModel = self.viewModels[indexPath.item]
+        let movieModel = self.movieModels[indexPath.item]
         
-        let titleName = movieModel.titleName.isEmpty ? movieModel.title : movieModel.titleName
-        
-        SimpleAPI.shared.youtube(with: titleName) { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .success(let videoElement):
-                guard !movieModel.overView.isEmpty else { return }
-                let youtubeViewModel = YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView)
-                self.delegate?.CollectionViewTableViewCEllDidTapCell(self, viewModel: youtubeViewModel)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+//        let titleName = movieModel.titleName.isEmpty ? movieModel.title : movieModel.titleName
+//        
+//        SimpleAPI.shared.youtube(with: titleName) { [weak self] in
+//            guard let self = self else { return }
+//            
+//            switch $0 {
+//            case .success(let videoElement):
+//                guard !movieModel.overView.isEmpty else { return }
+//                let youtubeViewModel = YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: movieModel.overView)
+//                self.delegate?.CollectionViewTableViewCEllDidTapCell(self, viewModel: youtubeViewModel)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
