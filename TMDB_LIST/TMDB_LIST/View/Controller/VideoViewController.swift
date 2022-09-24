@@ -284,7 +284,7 @@ extension VideoViewController {
 // MARK: - Custom Delegates
 
 extension VideoViewController: CollectionViewTableViewCEllDelegate {
-    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
+    func didTapCell(viewModel: YoutubeSearchViewModel) {
         
         DispatchQueue.main.async {
             let detailViewController = VideoDetailViewController()
@@ -294,26 +294,3 @@ extension VideoViewController: CollectionViewTableViewCEllDelegate {
     }
 }
 
-extension CollectionViewTableViewCEll: HasDelegate {
-    public typealias Delegate = CollectionViewTableViewCEllDelegate
-}
-
-final class RxTableViewCellDelegateProxy: DelegateProxy<CollectionViewTableViewCEll, CollectionViewTableViewCEllDelegate>, DelegateProxyType, CollectionViewTableViewCEllDelegate {
-    init(parentObject: CollectionViewTableViewCEll) {
-        super.init(parentObject: parentObject, delegateProxy: RxTableViewCellDelegateProxy.self)
-    }
-    
-    static func registerKnownImplementations() {
-        self.register(make: RxTableViewCellDelegateProxy.init)
-    }
-}
-
-extension Reactive where Base: CollectionViewTableViewCEll {
-    var delegate: DelegateProxy<CollectionViewTableViewCEll, CollectionViewTableViewCEllDelegate> {
-        RxTableViewCellDelegateProxy.proxy(for: self.base)
-    }
-    
-    var youtubeSearchViewModel: Observable<YoutubeSearchViewModel> {
-        delegate.methodInvoked(#selector(CollectionViewTableViewCEllDelegate.didtapcell))
-    }
-}

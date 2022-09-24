@@ -10,7 +10,7 @@ import RxSwift
 import RxDataSources
 
 protocol CollectionViewTableViewCEllDelegate: AnyObject {
-    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel)
+    func didTapCell(viewModel: YoutubeSearchViewModel)
 }
 
 final class CollectionViewTableViewCEll: UITableViewCell {
@@ -20,7 +20,7 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     
     private var movieModels = [MovieModel]()
     
-    weak var delegate: CollectionViewTableViewCEllDelegate?
+    var delegate: CollectionViewTableViewCEllDelegate?
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         $0.scrollDirection = .horizontal
@@ -86,7 +86,7 @@ extension CollectionViewTableViewCEll: ViewModelBindableType {
                 }
             }
             .subscribe(with: self, onNext: {
-                $0.delegate?.CollectionViewTableViewCEllDidTapCell(self, viewModel: $1)
+                $0.delegate?.didTapCell(viewModel: $1)
             })
             .disposed(by: self.disposeBag)
     }
