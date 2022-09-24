@@ -284,7 +284,7 @@ extension VideoViewController {
 // MARK: - Custom Delegates
 
 extension VideoViewController: CollectionViewTableViewCEllDelegate {
-    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel) {
+    func didTapCell(viewModel: YoutubeSearchViewModel) {
         
         DispatchQueue.main.async {
             let detailViewController = VideoDetailViewController()
@@ -293,3 +293,4 @@ extension VideoViewController: CollectionViewTableViewCEllDelegate {
         }
     }
 }
+

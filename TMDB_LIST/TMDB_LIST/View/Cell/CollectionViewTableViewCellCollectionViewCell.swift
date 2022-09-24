@@ -10,7 +10,7 @@ import RxSwift
 import RxDataSources
 
 protocol CollectionViewTableViewCEllDelegate: AnyObject {
-    func CollectionViewTableViewCEllDidTapCell(_ cell: CollectionViewTableViewCEll, viewModel: YoutubeSearchViewModel)
+    func didTapCell(viewModel: YoutubeSearchViewModel)
 }
 
 final class CollectionViewTableViewCEll: UITableViewCell {
@@ -20,7 +20,7 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     
     private var movieModels = [MovieModel]()
     
-    weak var delegate: CollectionViewTableViewCEllDelegate?
+    var delegate: CollectionViewTableViewCEllDelegate?
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         $0.scrollDirection = .horizontal
@@ -44,9 +44,9 @@ final class CollectionViewTableViewCEll: UITableViewCell {
     }
 
     override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
         super.prepareForReuse()
         
-        self.disposeBag = DisposeBag()
     }
     
     override func layoutSubviews() {
@@ -54,20 +54,40 @@ final class CollectionViewTableViewCEll: UITableViewCell {
         
         self.collectionView.frame = self.contentView.bounds
     }
-    
-    func configure(with movieModels: [MovieModel]) {
-        self.movieModels = movieModels
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
 }
 
 extension CollectionViewTableViewCEll: ViewModelBindableType {
     func bindInput(viewModel: CollectionTableViewCEllViewModel) {
         Observable.just(.load)
             .bind(to: viewModel.input)
+            .disposed(by: self.disposeBag)
+        
+        // ViewModel 로 옮기면 Best~!!@
+        self.collectionView.rx.modelSelected(MovieModel.self)
+            .map { ($0.title, $0.overview) }
+            .flatMapLatest { (titleName, overView) in
+                let titleName = titleName ?? ""
+                let overView = overView ?? ""
+
+                return Observable.create { observer in
+                    SimpleAPI.shared.youtube(with: titleName) { value in
+                        switch value {
+                        case .success(let videoElement):
+                            let youtubeViewModel = YoutubeSearchViewModel(title: titleName, youtubeViewElement: videoElement, overView: overView)
+                            observer.onNext(youtubeViewModel)
+                            observer.onCompleted()
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            observer.onCompleted()
+                        }
+                    }
+                    
+                    return Disposables.create()
+                }
+            }
+            .subscribe(with: self, onNext: {
+                $0.delegate?.didTapCell(viewModel: $1)
+            })
             .disposed(by: self.disposeBag)
     }
     
